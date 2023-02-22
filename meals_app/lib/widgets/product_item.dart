@@ -20,11 +20,13 @@ class ProductItem extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.favorite),
           onPressed: () => {},
+          color: Theme.of(context).accentColor,
         ),
-        backgroundColor: Colors.black.withAlpha(100),
+        backgroundColor: Colors.black87,
         trailing: IconButton(
           icon: const Icon(Icons.shopping_cart),
           onPressed: () => {},
+          color: Theme.of(context).accentColor,
         ),
       ),
     );
