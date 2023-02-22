@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:meals_app/models/product.dart';
+import 'package:meals_app/screens/product_details_screen.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -11,9 +12,15 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridTile(
-      child: Image.network(
-        product.imageUrl,
-        fit: BoxFit.cover,
+      child: GestureDetector(
+        child: Image.network(
+          product.imageUrl,
+          fit: BoxFit.cover,
+        ),
+        onTap: () => {
+          Navigator.of(context)
+              .pushNamed(ProductDetailsScreen.routeName, arguments: product.id)
+        },
       ),
       footer: GridTileBar(
         title: Text(product.title, textAlign: TextAlign.center),
