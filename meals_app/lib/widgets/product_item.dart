@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Product product = Provider.of<Product>(context);
+    final Product product = Provider.of<Product>(context, listen: false);
     return GridTile(
       child: GestureDetector(
         child: Image.network(
@@ -20,11 +20,13 @@ class ProductItem extends StatelessWidget {
       ),
       footer: GridTileBar(
         title: Text(product.title, textAlign: TextAlign.center),
-        leading: IconButton(
-          icon:
-              Icon(product.isFavorite ? Icons.favorite : Icons.favorite_border),
-          onPressed: () => {product.toggleFavoriteStatus()},
-          color: Theme.of(context).accentColor,
+        leading: Consumer<Product>(
+          builder: (ctx, product, child) => IconButton(
+            icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border),
+            color: Theme.of(context).accentColor,
+            onPressed: () => {product.toggleFavoriteStatus()},
+          ),
         ),
         backgroundColor: Colors.black87,
         trailing: IconButton(
