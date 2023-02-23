@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:meals_app/models/product.dart';
+import 'package:meals_app/providers/product.dart';
 import 'package:meals_app/screens/product_details_screen.dart';
+import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product product;
-
-  ProductItem(this.product);
-
   @override
   Widget build(BuildContext context) {
+    final Product product = Provider.of<Product>(context);
     return GridTile(
       child: GestureDetector(
         child: Image.network(
@@ -25,8 +21,9 @@ class ProductItem extends StatelessWidget {
       footer: GridTileBar(
         title: Text(product.title, textAlign: TextAlign.center),
         leading: IconButton(
-          icon: const Icon(Icons.favorite),
-          onPressed: () => {},
+          icon:
+              Icon(product.isFavorite ? Icons.favorite : Icons.favorite_border),
+          onPressed: () => {product.toggleFavoriteStatus()},
           color: Theme.of(context).accentColor,
         ),
         backgroundColor: Colors.black87,
