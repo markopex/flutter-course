@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:meals_app/providers/cart.dart' show Cart;
+import 'package:meals_app/providers/orders.dart';
 import 'package:meals_app/widgets/cart_item.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +51,13 @@ class CartScreen extends StatelessWidget {
                         "ORDER NOW",
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                      onPressed: () => {},
+                      onPressed: () {
+                        Provider.of<Orders>(context, listen: false).addOrder(
+                          cart.items.values.toList(),
+                          cart.totalAmount,
+                        );
+                        cart.clear();
+                      },
                     )
                   ]),
             ),
