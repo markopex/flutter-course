@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meals_app/providers/product.dart';
 
 class Products with ChangeNotifier {
-  List<Product> _items = [
+  final List<Product> _items = [
     Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -39,6 +39,10 @@ class Products with ChangeNotifier {
 
   List<Product> get items {
     return [..._items];
+  }
+
+  List<Product> get favorites {
+    return _items.where((product) => product.isFavorite).toList();
   }
 
   Product findById(String id) {
